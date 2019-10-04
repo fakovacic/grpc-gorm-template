@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protoexpl/data.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/create": {
+      "post": {
+        "summary": "Create",
+        "operationId": "Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoexplCreateResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoexplData"
+            }
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/delete/{id}": {
+      "delete": {
+        "summary": "Delete",
+        "operationId": "Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoexplDeleteResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/list": {
+      "get": {
+        "summary": "List",
+        "operationId": "List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoexplListResponse"
+            }
+          }
+        },
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/read/{id}": {
+      "get": {
+        "summary": "Read",
+        "operationId": "Read",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoexplReadResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    },
+    "/v1/update": {
+      "put": {
+        "summary": "Update",
+        "operationId": "Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protoexplUpdateResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoexplData"
+            }
+          }
+        ],
+        "tags": [
+          "DataService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoexplCreateResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "CreateResponse\nreturn ID for new created data"
+    },
+    "protoexplData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64",
+          "title": "unique ID gen by service"
+        },
+        "name": {
+          "type": "string",
+          "title": "Name of data"
+        }
+      },
+      "title": "Data struct for service"
+    },
+    "protoexplDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "DeleteResponse\nreturn NOT_FOUND if failed"
+    },
+    "protoexplListResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoexplData"
+          }
+        }
+      },
+      "title": "ListResponse\nretrive data streams"
+    },
+    "protoexplReadResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/protoexplData"
+        }
+      },
+      "title": "ReadResponse\nretrive data by id\nreturn NOT_FOUND if failed"
+    },
+    "protoexplUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "UpdateResponse\nreturn NOT_FOUND if failed"
+    }
+  }
+}

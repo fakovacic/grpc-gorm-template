@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package protoexpl;
+
+option go_package = "protoexpl";
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+
+// DataService contains endpoints&grpc calls
+service DataService {
+    // Create
+    rpc Create (CreateRequest) returns (CreateResponse){
+        option (google.api.http) = {
+            post: "/v1/create"
+            body: "data"
+          };
+    }
+    // Read
+    rpc Read (ReadRequest) returns (ReadResponse){
+        option (google.api.http) = {
+            get: "/v1/read/{id}"
+          };
+    }
+    // Update
+    rpc Update (UpdateRequest) returns (UpdateResponse){
+        option (google.api.http) = {
+            put: "/v1/update"
+            body: "data"
+          };
+    }
+    // Delete
+    rpc Delete (DeleteRequest) returns (DeleteResponse){
+        option (google.api.http) = {
+            delete: "/v1/delete/{id}"
+          };
+    }
+    // List
+    rpc List (ListRequest) returns (ListResponse){
+        option (google.api.http) = {
+            get: "/v1/list"
+          };
+    }
+}
+
+// Data struct for service
+message Data {
+    // unique ID gen by service 
+    uint64 id = 1;
+    // Name of data
+    string name = 2;
+}
+
+// CreateRequest
+// receive data from client
+message CreateRequest {
+    Data data = 1;
+}
+
+// CreateResponse
+// return ID for new created data
+message CreateResponse {
+    string status = 1;
+}
+
+// ReadRequest
+// receive id in GET request
+message ReadRequest {
+    uint64 id = 1;
+}
+
+// ReadResponse
+// retrive data by id
+// return NOT_FOUND if failed
+message ReadResponse {
+    Data data = 1;
+}
+
+// UpdateRequest
+// receive data with ID to update certain object
+message UpdateRequest {
+    Data data = 1;
+}
+
+// UpdateResponse
+// return NOT_FOUND if failed
+message UpdateResponse {
+    string status = 1;
+}
+
+// UpdateResponse
+// receive ID, delete object by ID
+message DeleteRequest {
+    uint64 id = 1;
+}
+
+// DeleteResponse
+// return NOT_FOUND if failed
+message DeleteResponse {
+    string status = 1;
+}
+
+// ListRequest 
+// receive filters by widcard
+message ListRequest {
+
+}
+
+// ListResponse
+// retrive data streams
+message ListResponse {
+    repeated Data data = 1;
+}
+
