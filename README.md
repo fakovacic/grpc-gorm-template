@@ -60,7 +60,7 @@ creds.OverrideServerName("localhost") - change
 7. Run app
 
 ```
-DBCONN="root:fak@(localhost)/grpc?charset=utf8&parseTime=True&loc=Local" TBL="data" UI="7000" REST="7010" GRPC="7020" go run *.go
+DBCONN="user:pass@(localhost)/grpc?charset=utf8&parseTime=True&loc=Local" TBL="data" UI="7000" REST="7010" GRPC="7020" go run *.go
 ```
 
 ## Docker
@@ -74,5 +74,5 @@ docker build -t grpc:gorm .
 2. Run container
 
 ```
-docker run -d  -e "DBCONN=root:fak@(localhost)/grpc?charset=utf8&parseTime=True&loc=Local" -e "TBL=grpc" -e "UI=8060" -e "REST=8070" -e "GRPC=8080" -p 8060:8060 -p 8070:8070 -p 8080:8080 --name grpc-gorm-template grpc:gorm
+docker run -d  -e "DBCONN=user:pass@(localhost)/grpc?charset=utf8&parseTime=True&loc=Local" -e "TBL=grpc" -e "UI=8060" -e "REST=8070" -e "GRPC=8080" -p 8060:8060 -p 8070:8070 -p 8080:8080 --name grpc-gorm-template grpc:gorm
 ```
